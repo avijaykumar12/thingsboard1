@@ -93,6 +93,8 @@ export class GatewayConnectorComponent extends PageComponent implements AfterVie
     ConnectorType.MQTT,
     ConnectorType.OPCUA,
     ConnectorType.MODBUS,
+    ConnectorType.OPCUA,
+    ConnectorType.SOCKET
   ]);
   readonly gatewayLogLevel = Object.values(GatewayLogLevel);
   readonly displayedColumns = ['enabled', 'key', 'type', 'syncStatus', 'errors', 'actions'];
@@ -749,6 +751,7 @@ export class GatewayConnectorComponent extends PageComponent implements AfterVie
       case ConnectorType.MQTT:
       case ConnectorType.OPCUA:
       case ConnectorType.MODBUS:
+      case ConnectorType.SOCKET:
         this.connectorForm.get('mode').setValue(connector.mode || ConnectorConfigurationModes.BASIC, {emitEvent: false});
         setTimeout(() => {
           this.connectorForm.patchValue(connector, {emitEvent: false});
