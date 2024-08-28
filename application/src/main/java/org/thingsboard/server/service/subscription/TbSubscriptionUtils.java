@@ -82,10 +82,12 @@ public class TbSubscriptionUtils {
         return ToCoreMsg.newBuilder().setToSubscriptionMgrMsg(msgBuilder).build();
     }
 
-    public static ToCoreNotificationMsg toProto(UUID id, int seqNumber, TbEntityUpdatesInfo update) {
+    public static ToCoreNotificationMsg toProto(TenantId tenantId, UUID id, int seqNumber, TbEntityUpdatesInfo update) {
         TransportProtos.TbEntitySubEventCallbackProto.Builder updateProto = TransportProtos.TbEntitySubEventCallbackProto.newBuilder()
                 .setEntityIdMSB(id.getMostSignificantBits())
                 .setEntityIdLSB(id.getLeastSignificantBits())
+                .setTenantIdMSB(tenantId.getId().getMostSignificantBits())
+                .setTenantIdLSB(tenantId.getId().getLeastSignificantBits())
                 .setSeqNumber(seqNumber)
                 .setAttributesUpdateTs(update.attributesUpdateTs)
                 .setTimeSeriesUpdateTs(update.timeSeriesUpdateTs);
@@ -107,8 +109,9 @@ public class TbSubscriptionUtils {
                 .type(event);
         if (!ComponentLifecycleEvent.DELETED.equals(event)) {
             builder.info(new TbSubscriptionsInfo(proto.getNotifications(), proto.getAlarms(),
-                    proto.getTsAllKeys(), proto.getTsKeysCount() > 0 ? new HashSet<>(proto.getTsKeysList()) : null,
-                    proto.getAttrAllKeys(), proto.getAttrKeysCount() > 0 ? new HashSet<>(proto.getAttrKeysList()) : null,
+                    proto.getTsAllKeys(), proto.getAttrAllKeys(),
+                    proto.getTsKeysCount() > 0 ? new HashSet<>(proto.getTsKeysList()) : null,
+                    proto.getAttrKeysCount() > 0 ? new HashSet<>(proto.getAttrKeysList()) : null,
                     proto.getSeqNumber()));
         }
         return builder.build();
