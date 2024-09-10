@@ -151,6 +151,12 @@ import {
 import {
     GatewayAdvancedConfigurationComponent
 } from '@home/components/widget/lib/gateway/configuration/advanced/gateway-advanced-configuration.component';
+import {
+    ConfigurationJsonComponent
+} from '@home/components/widget/lib/gateway/connectors-configuration/configuration-json/components/configuration-json.component';
+import {
+  ConfigurationValidateService
+} from '@home/components/widget/lib/gateway/connectors-configuration/configuration-json/services/configuration-validate.service';
 
 @NgModule({
   declarations: [
@@ -239,6 +245,7 @@ import {
     ModbusBasicConfigComponent,
     EllipsisChipListDirective,
     ModbusRpcParametersComponent,
+    ConfigurationJsonComponent,
     GatewayBasicConfigurationComponent,
     GatewayAdvancedConfigurationComponent,
   ],
@@ -310,7 +317,8 @@ import {
     ScadaSymbolWidgetComponent
   ],
   providers: [
-    {provide: WIDGET_COMPONENTS_MODULE_TOKEN, useValue: WidgetComponentsModule}
+    {provide: WIDGET_COMPONENTS_MODULE_TOKEN, useValue: WidgetComponentsModule},
+    {provide: ConfigurationValidateService, useClass: ConfigurationValidateService},
   ]
 })
 export class WidgetComponentsModule {
