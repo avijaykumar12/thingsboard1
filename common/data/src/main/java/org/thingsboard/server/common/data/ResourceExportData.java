@@ -13,13 +13,31 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.thingsboard.server.common.data.util;
+package org.thingsboard.server.common.data;
 
-import org.thingsboard.server.common.data.exception.ThingsboardException;
+import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
-@FunctionalInterface
-public interface ThrowingSupplier<T> {
+@Schema
+@Slf4j
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class ResourceExportData {
 
-    T get() throws ThingsboardException;
+    private String title;
+    private ResourceType type;
+    private ResourceSubType subType;
+    private String resourceKey;
+    private String fileName;
+    private String publicResourceKey;
+    private boolean isPublic;
+    private String mediaType;
+    private String data;
 
 }
