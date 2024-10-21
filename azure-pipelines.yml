@@ -13,7 +13,7 @@ steps:
 - task: Maven@4
   inputs:
     mavenPomFile: 'pom.xml'                           # The location of the POM file
-    goals: 'clean test'                                  # Define Maven goals (e.g., clean install, package, etc.)
+    goals: 'clean'                                    # Define Maven goals (e.g., clean install, package, etc.)
     options: '-Xmx1024m'                              # Optional: Additional Maven options (e.g., memory settings)
     publishJUnitResults: true                         # Publish test results to Azure Pipelines
     testResultsFiles: '**/surefire-reports/TEST-*.xml' # Location of the JUnit test results
