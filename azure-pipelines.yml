@@ -12,16 +12,11 @@ pool:
 steps:
 - task: Maven@4
   inputs:
-    mavenPomFile: 'pom.xml'                           # The location of the POM file
-    goals: 'clean install'                             # Define Maven goals (e.g., clean install, package, etc.)
-    options: '-Xmx1024m'                              # Optional: Additional Maven options (e.g., memory settings)
-    publishJUnitResults: true                         # Publish test results to Azure Pipelines
-    testResultsFiles: '**/surefire-reports/TEST-*.xml' # Location of the JUnit test results
-    javaHomeOption: 'JDKVersion'                      # Specify JDK version option
-    jdkVersionOption: '1.8'                           # Define the JDK version (e.g., 1.8, 11, etc.)
-    jdkArchitectureOption: 'x64'                      # Specify architecture (x64 or x86)
-    mavenVersionOption: 'Default'                     # Use the default Maven version (or 'Custom' if you want to specify a version)
-    mavenAuthenticateFeed: false                      # Set to true if you're using authenticated Maven feeds
-    effectivePomSkip: false                           # Set to true to skip generating the effective POM
-    sonarQubeRunAnalysis: false                       # Set to true if you're integrating SonarQube analysis
-
+    mavenPomFile: 'pom.xml'
+    publishJUnitResults: true
+    testResultsFiles: '**/surefire-reports/TEST-*.xml'
+    javaHomeOption: 'JDKVersion'
+    mavenVersionOption: 'Default'
+    mavenAuthenticateFeed: false
+    effectivePomSkip: false
+    sonarQubeRunAnalysis: false
